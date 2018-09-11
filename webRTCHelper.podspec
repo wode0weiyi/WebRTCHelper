@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "webRTCHelper"
-  s.version      = "1"
+  s.version      = "1.0.0"
   s.summary      = "webRTCHelper."
 
   # This description is used to generate tags and improve search results.
@@ -54,9 +54,9 @@ Pod::Spec.new do |s|
   #
 
   s.author             = { "huzhihui" => "wonderfulhzh@163.com" }
-  # Or just: s.author    = "CasaTaloyum"
-  # s.authors            = { "CasaTaloyum" => "casatwy@msn.com" }
-  # s.social_media_url   = "http://twitter.com/CasaTaloyum"
+  # Or just: s.author    = "huzhihui"
+  # s.authors            = { "huzhihui" => "wonderfulhzh@163.com" }
+  # s.social_media_url   = ""
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "9.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "webRTCHelper/webRTCHelper/**/*.{h,m}"
+  s.source_files  = "webRTCHelper/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -134,7 +134,7 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "BLNetworking"
-  # s.dependency "BLAPIManagers"
-  # s.dependency "BLMediator"
+    s.dependency "SocketRocket"
+   s.dependency "GoogleWebRTC"
 
 end

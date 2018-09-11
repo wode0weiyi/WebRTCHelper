@@ -7,7 +7,6 @@
 //
 
 #import "WebRTCHelper.h"
-#import <ReactiveObjC/ReactiveObjC.h>
 
 #define kAPPID  @"1234567890abcdefg"
 #define kDeviceUUID [[[UIDevice currentDevice] identifierForVendor] UUIDString]
@@ -70,26 +69,10 @@ static WebRTCHelper * instance = nil;
 - (void)connectServer:(NSString *)server port:(NSString *)port room:(NSString *)room{
     _server = server;
     _room = room;
-    NSString * string = @"http://115.236.101.203:18800/token";
-    string = [NSString stringWithFormat:@"%@?appid=%@&uid=%@",string,kAPPID,kDeviceUUID];
-    NSURL * url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@?sign=b3405b594d970397c38b92b73b39f13290318d281234567890abcdefg1536538705000c0411&uid=%@",server,port,kDeviceUUID]] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20];
-//  NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"ws://%@:%@",server,port]] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:20];
     _socket = [[SRWebSocket alloc] initWithURLRequest:request];
     _socket.delegate = self;
     [_socket open];
-//    NSString * string = @"http://115.236.101.203:18800/token";
-//    string = [NSString stringWithFormat:@"%@?appid=%@&uid=%@",string,kAPPID,kDeviceUUID];
-//    NSURL * url = [NSURL URLWithString:string];
-//    RTCLog(@"Joining room:%@ on room server.", room);
-//    NSMutableURLRequest * urlRequest = [NSMutableURLRequest requestWithURL:url];
-//    urlRequest.HTTPMethod = @"POST";
-//    [[NSURLConnection rac_sendAsynchronousRequest:urlRequest] subscribeNext:^(RACTwoTuple<NSURLResponse *,NSData *> * _Nullable x) {
-//        NSString * str = [[NSString alloc] initWithData:[x second] encoding:NSUTF8StringEncoding];
-//        [self joinRoom:room];
-//        NSLog(@"%@",str);
-//    }];
-    
 }
 
 
