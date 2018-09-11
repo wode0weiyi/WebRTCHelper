@@ -12,6 +12,6 @@ s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 s.author             = { "huzhihui" => "wonderfulhzh@163.com" }
 s.platform     = :ios, "8.0"
 s.source       = { :git => "https://github.com/wode0weiyi/WebRTCHelper.git", :tag => s.version.to_s }
-s.source_files  = "WebRTCHelper/*.{h,m}"
+s.source_files  = "webRTCHelper/*.{h,m}"
 s.requires_arc = true
 end
