@@ -1,2 +1,1 @@
-# WebRTCHelper
-webRtc-ios的管理类
+pod "webRTCHelper"
