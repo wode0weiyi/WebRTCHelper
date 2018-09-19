@@ -62,7 +62,7 @@ typedef enum : NSUInteger {
  */
 -(void)webRTCHelper:(WebRTCHelper *)webRTCHelper receiveMessage:(NSString *)message;
 /**
- * 获取本地的localVideoStream数据
+ * 获取本地的localVideoStream数据（旧版本返回localStream方法）
  * @param webRTCHelper 本类
  * @param steam 视频流
  * @param userId 用户标识
@@ -91,6 +91,11 @@ typedef enum : NSUInteger {
  WebSocketConnectClosed 关闭
  */
 -(void)webRTCHelper:(WebRTCHelper *)webRTCHelper socketConnectState:(WebSocketConnectState)connectState;
+/**
+ * 获取本地视频流的AVCaptureSession（新版本实现本地视频展示代理）
+ * @param webRTCHelper
+ * @param captureSession AVCaptureSession类
+ */
 -(void)webRTCHelper:(WebRTCHelper *)webRTCHelper capturerSession:(AVCaptureSession *)captureSession;
 @end
 

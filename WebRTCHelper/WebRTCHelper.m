@@ -272,20 +272,27 @@ static WebRTCHelper * instance = nil;
     {
         if (device)
         {
+            /**新版本写法*/
+            //创建一个RTCVideoSource
             RTCVideoSource *videoSource = [_factory videoSource];
+            //创建RTCCameraVideoCapturer，指定代理为上面创建的RTCVideoSource
             RTCCameraVideoCapturer * capture = [[RTCCameraVideoCapturer alloc] initWithDelegate:videoSource];
+            //创建一个AVCaptureDeviceFormat，这个主要是指定摄像头的前后
             AVCaptureDeviceFormat * format = [[RTCCameraVideoCapturer supportedFormatsForDevice:device] lastObject];
+            //获取手机屏幕的刷新率
             CGFloat fps = [[format videoSupportedFrameRateRanges] firstObject].maxFrameRate;
-            RTCVideoTrack *videoTrack = [_factory videoTrackWithSource:videoSource trackId:@"ARDAMSv0"];
+            
+//            RTCVideoTrack *videoTrack = [_factory videoTrackWithSource:videoSource trackId:@"ARDAMSv0"];
             __weak RTCCameraVideoCapturer *weakCapture = capture;
             __weak RTCMediaStream * weakStream = _localStream;
             __weak NSString * weakMyId = _myId;
+            //创建本地视频流的Capture
             [weakCapture startCaptureWithDevice:device format:format fps:fps completionHandler:^(NSError * error) {
                 NSLog(@"11111111");
-                [weakStream addVideoTrack:videoTrack];
+//                [weakStream addVideoTrack:videoTrack];
                 if ([self->_delegate respondsToSelector:@selector(webRTCHelper:setLocalStream:userId:)])
                 {
-                    [self->_delegate webRTCHelper:self setLocalStream:weakStream userId:weakMyId];
+//                    [self->_delegate webRTCHelper:self setLocalStream:weakStream userId:weakMyId];
                     [self->_delegate webRTCHelper:self capturerSession:weakCapture.captureSession];
                 }
             }];
@@ -622,6 +629,9 @@ static WebRTCHelper * instance = nil;
     }
 }
 
+/**
+ * webSocket连接成功
+ */
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket{
     NSLog(@"socket连接成功");
     [self joinRoom:_room];
@@ -631,7 +641,9 @@ static WebRTCHelper * instance = nil;
         }
     });
 }
-
+/**
+ * webSocket连接失败，返回失败原因
+ */
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error{
     NSLog(@"socket连接失败");
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -640,7 +652,9 @@ static WebRTCHelper * instance = nil;
         }
     });
 }
-
+/**
+ * webSocket关闭连接，返回关闭的原因reason
+ */
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean{
     NSLog(@"socket关闭。code = %ld,reason = %@",code,reason);
 }
