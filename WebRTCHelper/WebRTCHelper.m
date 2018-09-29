@@ -272,6 +272,24 @@ static WebRTCHelper * instance = nil;
     {
         if (device)
         {
+            /**
+             * 旧版本写法
+             * 旧版本创建videoSource是RTCAVFoundationVideoSource类，新版是RTCVideoSource，且创建的方法也不一样
+             */
+            /*
+            RTCAVFoundationVideoSource *videoSource = [_factory avFoundationVideoSourceWithConstraints:[self localVideoConstraints]];
+            //创建RTCVideoTrack,这个方法没有什么变化
+            RTCVideoTrack *videoTrack = [_factory videoTrackWithSource:videoSource trackId:@"ARDAMSv0"];
+            //本地流添加RTCVideoTrack
+            [_localStream addVideoTrack:videoTrack];
+             //设置代理回调，将stream数据传到展示界面
+             if ([self->_delegate respondsToSelector:@selector(webRTCHelper:setLocalStream:userId:)])
+             {
+                [self->_delegate webRTCHelper:self setLocalStream:weakStream userId:weakMyId];
+             
+             }
+             */
+            
             /**新版本写法*/
             //创建一个RTCVideoSource
             RTCVideoSource *videoSource = [_factory videoSource];
